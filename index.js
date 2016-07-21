@@ -2,7 +2,6 @@
 var path = require('path');
 var fs = require('fs-extra');
 var _ = require('lodash');
-var sourceInliner = require('inline-critical');
 /* jshint -W079 */
 var Promise = require('bluebird');
 var through2 = require('through2');
@@ -42,20 +41,6 @@ exports.generate = function (opts, cb) {
             var dir = path.dirname(file);
             return fs.ensureDirAsync(dir).then(function () {
                 return fs.writeFileAsync(path.resolve(opts.styleTarget), output);
-            });
-        });
-    }
-
-    // inline
-    if (opts.inline) {
-        corePromise = Promise.props({
-            html: file.getContentPromise(opts),
-            css: corePromise
-        }).then(function (result) {
-            return sourceInliner(result.html, result.css, {
-                minify: opts.minify || false,
-                extract: opts.extract || false,
-                basePath: opts.base || process.cwd()
             });
         });
     }

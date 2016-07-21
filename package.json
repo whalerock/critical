@@ -37,7 +37,6 @@
     "get-stdin": "^5.0.0",
     "gulp-util": "^3.0.2",
     "indent-string": "^2.1.0",
-    "inline-critical": "^2.1.5",
     "lodash": "^4.0.0",
     "meow": "^3.3.0",
     "mime-types": "^2.1.6",
